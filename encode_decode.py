@@ -14,7 +14,7 @@ Label(window, text='Dermot', font='Times_New_Roman 20 bold').pack(side=BOTTOM)
 Text = StringVar()
 private_key = StringVar()
 mode = StringVar()
-result = StringVar()
+Result = StringVar()
 
 # function to encode
 
@@ -40,28 +40,59 @@ def decode(key, message):
 
 
 # function to set mode
-def mode():
+def Mode():
     if(mode.get() == 'e'):
-        result.set(encode(private_key.get(), Text.get()))
+        Result.set(encode(private_key.get(), Text.get()))
     elif(mode.get() == 'd'):
-        result.set(decode(private_key.get(), Text.get()))
+        Result.set(decode(private_key.get(), Text.get()))
     else:
-        result.set('Invalid Mode')
+        Result.set('Invalid Mode')
 
 # Function to exit the window
 
 
-def exit():
+def Exit():
     window.destroy()
 
 # Function to reset window
 
 
-def reset():
+def Reset():
     Text.set("")
     private_key.set("")
     mode.set("")
-    result.set("")
+    Result.set("")
+
+
+# optimise controls for the window
+# Message
+Label(window, font='Times_New_Roman 12 bold ',
+      text='MESSAGE').place(x=60, y=60)
+Entry(window, font='Times_New_Roman 10 ', textvariable=Text,
+      bg='ghost white') .place(x=290, y=60)
+
+# Key
+Label(window, font='Times_New_Roman 12 bold', text='Key').place(x=60, y=90)
+Entry(window, font='Times_New_Roman 10 ', textvariable=private_key,
+      bg='ghost white') .place(x=290, y=90)
+
+# Encode/Decode Mode
+Label(window, font='Times_New_Roman 12 bold',
+      text='MODE (e-encode, d-decode)').place(x=60, y=120)
+Entry(window, font='Times_New_Roman 10 ', textvariable=mode,
+      bg='ghost white') .place(x=290, y=120)
+
+# Results
+Entry(window, font='Times_New_Roman 10 bold',
+      textvariable=Result, bg='ghost white') .place(x=290, y=150)
+
+# Buttons for the window's interface
+Button(window, font='Times_New_Roman 10 bold', text='RESULT',
+       padx=2, bg='LightGray', command=Mode).place(x=60, y=150)
+Button(window, font='Times_New_Roman 10 bold', text='RESET', width=6,
+       padx=2, command=Reset, bg='LimeGreen', ).place(x=80, y=190)
+Button(window, font='Times_New_Roman 10 bold', text='EXIT', width=6,
+       padx=2, command=Exit, bg='OrangeRed') .place(x=180, y=190)
 
 
 window.mainloop()
